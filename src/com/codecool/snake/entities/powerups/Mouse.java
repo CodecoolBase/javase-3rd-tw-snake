@@ -17,7 +17,9 @@ public class Mouse extends GameEntity implements Animatable, Interactable {
 
 
     private Point2D heading;
-    private static final int life = 1;
+    private SnakeHead snakeHead;
+    private int life;
+    private double speed;
 
     public Mouse (Pane pane) {
         super(pane);
@@ -28,10 +30,37 @@ public class Mouse extends GameEntity implements Animatable, Interactable {
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
 
-        int speed = 1;
-        double direction = -90;
-        //setRotate(direction);
-        heading = Utils.directionToVector(direction, speed);
+        setLife(1);
+        setSpeed(0.5);
+        for (GameEntity gameObject : Globals.gameObjects) {
+            if (gameObject instanceof SnakeHead) {
+                setSnakeHead((SnakeHead) gameObject);
+            }
+        }
+    }
+
+    public SnakeHead getSnakeHead() {
+        return snakeHead;
+    }
+
+    public void setSnakeHead(SnakeHead snakeHead) {
+        this.snakeHead = snakeHead;
+    }
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
     }
 
 
@@ -40,8 +69,13 @@ public class Mouse extends GameEntity implements Animatable, Interactable {
         if (isOutOfBounds()) {
             destroy();
         }
+
+        // make mouse run away the snake
+        double dir = (Math.atan2(snakeHead.getY() - getY(), snakeHead.getX() - getX()) * 180 / Math.PI) - 90;
+        Point2D heading = Utils.directionToVector(dir, speed);
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
+        setRotate(dir);
     }
 
     @Override
@@ -57,9 +91,4 @@ public class Mouse extends GameEntity implements Animatable, Interactable {
         return "Ate Mouse:)";
     }
 
-
-    @Override
-    public void spawn() {
-        new Mouse(pane);
-    }
 }
