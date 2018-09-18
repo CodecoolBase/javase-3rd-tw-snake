@@ -17,8 +17,6 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 
-import static com.codecool.snake.Globals.eagle;
-import static com.codecool.snake.Globals.getGameObjects;
 
 public class Game extends Pane {
     public static int frame = 0;
@@ -62,6 +60,12 @@ public class Game extends Pane {
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
 
+    }
+
+    public void setBackground() {
+        setBackground(new Background(new BackgroundImage(Globals.grass,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
+                BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
     }
 
     public void setBackground() {
