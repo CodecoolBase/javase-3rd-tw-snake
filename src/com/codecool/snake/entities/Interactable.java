@@ -6,6 +6,7 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 public interface Interactable {
 
     void apply(SnakeHead snakeHead);
+    void spawn();
 
     String getMessage();
 
