@@ -1,7 +1,6 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.enemies.SimpleEnemy;
-import com.codecool.snake.entities.enemies.Eagle;
 import com.codecool.snake.entities.powerups.Beer;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
@@ -35,12 +34,12 @@ public class Game extends Pane {
         new Mouse(this);
 
 
-        new Eagle (this);
-        new Eagle (this);
-        new Eagle (this);
-        new Eagle (this);
-        new Eagle (this);
-        new Eagle (this);
+//        new Eagle (this);
+//        new Eagle (this);
+//        new Eagle (this);
+//        new Eagle (this);
+//        new Eagle (this);
+//        new Eagle (this);
 
 
         new Beer(this);
