@@ -1,5 +1,7 @@
 package com.codecool.snake.entities.snakes;
 
+import com.codecool.snake.Game;
+import com.codecool.snake.GameLoop;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
@@ -10,12 +12,13 @@ import javafx.scene.layout.Pane;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
-    private static final float speed = 2;
-    private static final float turnRate = 2;
+    private static float speed = 2;
+    private static float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
     public int lives = 0;
     private int score = 0;
+    private int drunkTimeEnd = -1;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -25,19 +28,19 @@ public class SnakeHead extends GameEntity implements Animatable {
         tail = this;
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
-
         addPart(4);
-
     }
 
     public void step() {
         double dir = getRotate();
+        float actualTurnRate = Game.time < drunkTimeEnd ? -turnRate : turnRate;
         if (Globals.leftKeyDown) {
-            dir = dir - turnRate;
+            dir = dir - actualTurnRate;
         }
         if (Globals.rightKeyDown) {
-            dir = dir + turnRate;
+            dir = dir + actualTurnRate;
         }
+
         // set rotation and position
         setRotate(dir);
         Point2D heading = Utils.directionToVector(dir, speed);
@@ -83,5 +86,9 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void changeScore(int diff) {
         score += diff;
         System.out.println("SCORE  " + score );
+    }
+
+    public void intoxicateSnake(int duration){
+        drunkTimeEnd = Game.time + duration;
     }
 }
