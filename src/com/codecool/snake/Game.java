@@ -36,7 +36,7 @@ public class Game extends Pane {
 
         new Beer(this);
 
-        new SimplePowerup(this)
+        new SimplePowerup(this);
 
 //        new Spawner(new Eagle(this), 0.5);
 
