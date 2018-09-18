@@ -28,12 +28,18 @@ public class SnakeHead extends GameEntity implements Animatable {
         tail = this;
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
-        addPart(4);
+        addPart(8);
     }
 
     public void step() {
         double dir = getRotate();
+
+        // make snake squint when drunk
+        setImage(Game.time < drunkTimeEnd ? Globals.drunkSnakeHead : Globals.snakeHead);
+
+        // set turnRate with a correction on intoxication
         float actualTurnRate = Game.time < drunkTimeEnd ? -turnRate : turnRate;
+
         if (Globals.leftKeyDown) {
             dir = dir - actualTurnRate;
         }
