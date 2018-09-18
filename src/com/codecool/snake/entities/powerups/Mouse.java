@@ -55,4 +55,10 @@ public class Mouse extends GameEntity implements Animatable, Interactable {
     public String getMessage() {
         return "Ate Mouse:)";
     }
+
+
+    @Override
+    public void spawn() {
+        new Mouse(pane);
+    }
 }

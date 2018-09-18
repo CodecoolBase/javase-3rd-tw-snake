@@ -53,5 +53,9 @@ public class Eagle extends GameEntity implements Animatable, Interactable {
         return "Eaten by Eagle";
     }
 
+    @Override
+    public void spawn() {
+        new Eagle(pane);
+    }
 }
 

@@ -31,4 +31,9 @@ public class Beer extends GameEntity implements Interactable {
     public String getMessage() {
         return "Don't drink and drive!";
     }
+
+    @Override
+    public void spawn() {
+        new Beer(pane);
+    }
 }

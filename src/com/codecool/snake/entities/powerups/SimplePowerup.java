@@ -34,4 +34,9 @@ public class SimplePowerup extends GameEntity implements Interactable {
     public String getMessage() {
         return "Got power-up :)";
     }
+
+    @Override
+    public void spawn() {
+        new SimplePowerup(pane);
+    }
 }

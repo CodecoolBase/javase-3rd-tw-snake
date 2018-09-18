@@ -52,4 +52,9 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
     public String getMessage() {
         return "10 damage";
     }
+
+    @Override
+    public void spawn() {
+        new SimpleEnemy(pane);
+    }
 }
