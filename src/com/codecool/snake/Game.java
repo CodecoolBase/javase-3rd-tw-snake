@@ -7,6 +7,12 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 import com.codecool.snake.entities.powerups.Mouse;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 
 public class Game extends Pane {
     public static int frame = 0;
@@ -52,6 +58,7 @@ public class Game extends Pane {
 
     public void start() {
         Scene scene = getScene();
+        setBackground();
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = true; break;
@@ -67,5 +74,11 @@ public class Game extends Pane {
         });
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
+    }
+
+    public void setBackground() {
+        setBackground(new Background(new BackgroundImage(Globals.grass,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
+                BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
     }
 }
