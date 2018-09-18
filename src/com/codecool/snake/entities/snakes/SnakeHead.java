@@ -29,7 +29,6 @@ public class SnakeHead extends GameEntity implements Animatable {
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
         addPart(8);
-        Globals.addGameObject(this);
     }
 
     public void step() {

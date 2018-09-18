@@ -1,24 +1,30 @@
 package com.codecool.snake;
 
-import com.codecool.snake.entities.Interactable;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
+import javafx.scene.layout.Pane;
+
+import java.lang.reflect.InvocationTargetException;
 
 
 public class Spawner {
 
-    public Spawner(Interactable entity, double time){
-
-        spawnObject(entity, time);
-
+    public Spawner(Pane pane, Class entityClass, double time){
+        spawnObject(pane, entityClass, time);
     }
 
-    private void spawnObject(Interactable entity, double time) {
-
+    private void spawnObject(Pane pane, Class<? extends Object> entityClass, double time) {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(time), ev -> {
-            entity.spawn();
+            if (Game.time > 1){
+                try {
+                    Class[] arguments = new Class[]{Pane.class};
+                    entityClass.getDeclaredConstructor(arguments).newInstance(pane);
+                } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();

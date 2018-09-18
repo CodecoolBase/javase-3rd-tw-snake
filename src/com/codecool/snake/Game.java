@@ -28,20 +28,18 @@ public class Game extends Pane {
 
         SnakeHead head = new SnakeHead(this, 500, 500);
 
-        new Spawner(new SimpleEnemy(this), 2.0);
+        new Spawner(this, SimpleEnemy.class, 2.0);
 
-        new Spawner(new Mouse(this), 2.5);
+        new Spawner(this, Mouse.class, 2.5);
+
+        new Spawner(this, Eagle.class, 4);
 
         new Beer(this);
 
         new SimplePowerup(this);
-
-//        new Spawner(new Eagle(this), 0.5);
-
     }
 
     public void start() {
-        System.out.println(Globals.getGameObjects().toString());
         Scene scene = getScene();
         setBackground();
         scene.setOnKeyPressed(event -> {
@@ -60,13 +58,7 @@ public class Game extends Pane {
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
 
-    }
-
-    public void setBackground() {
-        setBackground(new Background(new BackgroundImage(Globals.grass,
-                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
-                BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
-    }
+        }
 
     public void setBackground() {
         setBackground(new Background(new BackgroundImage(Globals.grass,

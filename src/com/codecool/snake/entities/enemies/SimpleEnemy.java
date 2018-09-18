@@ -53,8 +53,4 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
         return "10 damage";
     }
 
-    @Override
-    public void spawn() {
-        new SimpleEnemy(pane);
-    }
 }
