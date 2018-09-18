@@ -16,21 +16,48 @@ import java.util.Random;
 public class Eagle extends GameEntity implements Animatable, Interactable {
 
     private Point2D heading;
-    private static final int life = 1;
+    private SnakeHead snakeHead;
+    private int damage;
+    private int speed;
 
     public Eagle(Pane pane) {
         super(pane);
-
+        setDamage(1);
+        setSpeed(1);
         setImage(Globals.eagle);
         pane.getChildren().add(this);
         Random rnd = new Random();
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+        for (GameEntity gameObject : Globals.gameObjects) {
+            if (gameObject instanceof SnakeHead) {
+                setSnakeHead((SnakeHead) gameObject);
+            }
+        }
+    }
 
-        int speed = 1;
-        double direction = rnd.nextDouble() * 360;
-        setRotate(direction);
-        heading = Utils.directionToVector(direction, speed);
+    public SnakeHead getSnakeHead() {
+        return snakeHead;
+    }
+
+    public void setSnakeHead(SnakeHead snakeHead) {
+        this.snakeHead = snakeHead;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 
     @Override
@@ -38,13 +65,18 @@ public class Eagle extends GameEntity implements Animatable, Interactable {
         if (isOutOfBounds()) {
             destroy();
         }
+
+        // make eagle follow the snake
+        double dir = (Math.atan2(snakeHead.getY() - getY(), snakeHead.getX() - getX()) * 180 / Math.PI) + 90;
+        Point2D heading = Utils.directionToVector(dir, speed);
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
+        setRotate(dir);
     }
 
     @Override
     public void apply(SnakeHead player) {
-        player.changeLives(-life);
+        player.changeLives(-damage);
         destroy();
     }
 

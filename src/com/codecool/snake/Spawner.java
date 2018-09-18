@@ -10,6 +10,7 @@ import javafx.util.Duration;
 public class Spawner {
 
     public Spawner(Interactable entity, double time){
+
         spawnObject(entity, time);
 
     }

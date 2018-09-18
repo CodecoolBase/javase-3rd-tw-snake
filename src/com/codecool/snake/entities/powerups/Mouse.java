@@ -49,6 +49,7 @@ public class Mouse extends GameEntity implements Animatable, Interactable {
         snakeHead.addPart(4);
         snakeHead.changeLives(life);
         destroy();
+
     }
 
     @Override
