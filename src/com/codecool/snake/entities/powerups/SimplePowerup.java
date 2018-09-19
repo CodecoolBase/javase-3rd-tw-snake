@@ -6,7 +6,6 @@ import com.codecool.snake.entities.Heart;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.layout.Pane;
-
 import java.util.Random;
 
 // a simple powerup that makes the snake grow TODO make other powerups
