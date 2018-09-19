@@ -19,6 +19,9 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import jdk.nashorn.internal.objects.Global;
+
+import static com.codecool.snake.Globals.heartList;
 
 public class Game extends Pane {
     public static int frame = 0;
@@ -28,7 +31,7 @@ public class Game extends Pane {
         new Controls(this, 10, 10);
         SnakeHead head = new SnakeHead(this, 500, 500);
         initializeSpawners();
-        initializeLives(5);
+        initializeLives(Globals.lives);
 
     }
 
@@ -46,6 +49,8 @@ public class Game extends Pane {
         new Spawner(this, Eagle.class, 7.0);
         new Beer(this);
         new SimplePowerup(this);
+        new Spawner(this, SimplePowerup.class, 7.0);
+
     }
 
     public void start() {
@@ -85,13 +90,16 @@ public class Game extends Pane {
 
     public void restart() {
         this.getChildren().clear();
+        heartList.clear();
         new SnakeHead(this, 500, 500);
         new Controls(this, 10, 10);
 
         Globals.gameLoop.stop();
         Globals.gameObjects.clear();
-
+        Globals.isGamePaused = false;
+        initializeLives(Globals.lives);
         start();
+
     }
 
     public void pause() {

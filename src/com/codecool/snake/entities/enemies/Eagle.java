@@ -23,7 +23,7 @@ public class Eagle extends GameEntity implements Animatable, Interactable {
 
     public Eagle(Pane pane) {
         super(pane);
-        setDamage(1);
+        setDamage(-1);
         setSpeed(1);
         setImage(Globals.eagle);
         pane.getChildren().add(this);
@@ -77,7 +77,7 @@ public class Eagle extends GameEntity implements Animatable, Interactable {
 
     @Override
     public void apply(SnakeHead player) {
-        player.changeLives(-damage);
+        player.changeLives(damage);
         destroy();
         Heart.switchOffRedHeart();
 
