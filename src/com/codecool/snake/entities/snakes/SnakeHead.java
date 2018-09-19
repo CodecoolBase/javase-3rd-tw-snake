@@ -55,7 +55,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         setY(getY() + heading.getY());
 
         // shooting
-        if (Globals.SKeyDown && Game.time >= drunkTimeEnd){
+        if (Globals.SpaceKeyDown && Game.time >= drunkTimeEnd){
             setImage(Globals.laserSnakeHead);
             if (Game.frame >= shootFrameEnd) {
                 shootFrameEnd = Game.frame + shootFrameDelay;

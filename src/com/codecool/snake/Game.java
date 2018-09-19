@@ -24,7 +24,7 @@ public class Game extends Pane {
 
 
     public Game() {
-        new Controls(this, 10, 10);
+        //new Controls(this, 10, 10);
         SnakeHead head = new SnakeHead(this, 500, 500);
         initializeSpawners();
     }
@@ -48,8 +48,8 @@ public class Game extends Pane {
                 case RIGHT:
                     Globals.rightKeyDown = true;
                     break;
-                case S:
-                    Globals.SKeyDown = true;
+                case SPACE:
+                    Globals.SpaceKeyDown = true;
                     break;
             }
         });
@@ -62,8 +62,8 @@ public class Game extends Pane {
                 case RIGHT:
                     Globals.rightKeyDown = false;
                     break;
-                case S:
-                    Globals.SKeyDown = false;
+                case SPACE:
+                    Globals.SpaceKeyDown = false;
                     break;
             }
         });
@@ -81,7 +81,7 @@ public class Game extends Pane {
     public void restart() {
         this.getChildren().clear();
         new SnakeHead(this, 500, 500);
-        new Controls(this, 10, 10);
+        //new Controls(this, 10, 10);
 
         Globals.gameLoop.stop();
         Globals.gameObjects.clear();
