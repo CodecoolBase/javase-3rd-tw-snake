@@ -13,20 +13,35 @@ import java.lang.reflect.InvocationTargetException;
 
 public class Spawner {
 
-    public Spawner(Pane pane, Class entityClass, double time) {
-        spawnObject(pane, entityClass, time);
+    public Spawner(Pane pane, Class<? extends Object> entityClass, double time, int max) {
+
+
+        spawnObject(pane, entityClass, time, max);
     }
 
-    private void spawnObject(Pane pane, Class<? extends Object> entityClass, double time) {
+
+
+
+    private void spawnObject(Pane pane, Class<? extends Object> entityClass, double time, int max) {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(time), ev -> {
+
             boolean snakeHeadPresent = false;
+            int count =0;
+
+            for (GameEntity gameObject : Globals.gameObjects) {
+                if (gameObject.getClass() == entityClass) {
+                    count++;
+                }
+            }
+
+
             for (GameEntity gameObject : Globals.gameObjects) {
                 if (gameObject instanceof SnakeHead) {
                     snakeHeadPresent = true;
                     break;
                 }
             }
-            if (snakeHeadPresent && !Globals.isGamePaused) {
+            if (snakeHeadPresent && !Globals.isGamePaused && (count < max)) {
                 try {
                     Class[] arguments = new Class[]{Pane.class};
                     entityClass.getDeclaredConstructor(arguments).newInstance(pane);
