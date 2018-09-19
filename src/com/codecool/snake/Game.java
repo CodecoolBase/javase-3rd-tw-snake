@@ -25,18 +25,20 @@ public class Game extends Pane {
 
 
     public Game() {
+        new Controls(this, 10, 10);
+        initializeEnemies();
+
+    }
+
+    private void initializeEnemies() {
 
         SnakeHead head = new SnakeHead(this, 500, 500);
-
         new Spawner(this, SimpleEnemy.class, 2.0);
-
         new Spawner(this, Mouse.class, 2.5);
-
         new Spawner(this, Eagle.class, 4);
-
         new Beer(this);
-
         new SimplePowerup(this);
+
     }
 
     public void start() {
@@ -65,4 +67,24 @@ public class Game extends Pane {
                 BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
                 BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
     }
+
+    public void restart() {
+        this.getChildren().clear();
+//        new SnakeHead(this, 500, 500);
+        initializeEnemies();
+
+//        new SimplePowerup(this);
+//        new SimplePowerup(this);
+//        new SimplePowerup(this);
+//        new SimplePowerup(this);
+
+        new Controls(this, 10, 10);
+
+        Globals.gameLoop.stop();
+        Globals.gameObjects.clear();
+        Globals.gameLoop = new GameLoop();
+        Globals.gameLoop.start();
+    }
+
+
 }
