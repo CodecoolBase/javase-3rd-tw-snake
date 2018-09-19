@@ -1,6 +1,7 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
+import com.codecool.snake.entities.Heart;
 import javafx.scene.image.Image;
 
 import java.util.Collections;
@@ -22,6 +23,8 @@ public class Globals {
     public static Image mouse = new Image("m.png");
     public static Image eagle = new Image("eagle.png");
     public static Image grass = new Image("grass.jpg");
+    public static Image heart = new Image("heart.png");
+    public static Image blackHeart = new Image("blackHeart.png");
     //.. put here the other images you want to use
 
     public static boolean leftKeyDown;
@@ -31,10 +34,15 @@ public class Globals {
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
     public static GameLoop gameLoop;
 
+    public static List<Heart> heartList;
+
+
+
     static {
         gameObjects = new LinkedList<>();
         newGameObjects = new LinkedList<>();
         oldGameObjects = new LinkedList<>();
+        heartList = new LinkedList<>();
     }
 
     public static void addGameObject(GameEntity toAdd) {

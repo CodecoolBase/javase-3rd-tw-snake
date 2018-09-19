@@ -8,6 +8,7 @@ import com.codecool.snake.entities.powerups.Beer;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import com.codecool.snake.entities.powerups.Mouse;
+import com.codecool.snake.entities.Heart;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.image.Image;
@@ -24,9 +25,18 @@ public class Game extends Pane {
 
 
 
+
+
     public Game() {
         new Controls(this, 10, 10);
         initializeEnemies();
+        initializeLives(5);
+    }
+
+    private void initializeLives(int number){
+        for (int i=0; i<number; i++){
+            new Heart (this, 920-(60*i), 15 );
+        }
 
     }
 
@@ -34,8 +44,8 @@ public class Game extends Pane {
 
         SnakeHead head = new SnakeHead(this, 500, 500);
         new Spawner(this, SimpleEnemy.class, 2.0);
-        new Spawner(this, Mouse.class, 2.5);
-        new Spawner(this, Eagle.class, 4);
+        new Spawner(this, Mouse.class, 2.0);
+        new Spawner(this, Eagle.class, 7.0);
         new Beer(this);
         new SimplePowerup(this);
 
@@ -73,10 +83,7 @@ public class Game extends Pane {
 //        new SnakeHead(this, 500, 500);
         initializeEnemies();
 
-//        new SimplePowerup(this);
-//        new SimplePowerup(this);
-//        new SimplePowerup(this);
-//        new SimplePowerup(this);
+
 
         new Controls(this, 10, 10);
 
