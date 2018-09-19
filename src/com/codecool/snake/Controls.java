@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 
 public class Controls {
 
-    public Controls (Game pane,  int posX, int posY) {
+    public Controls(Game pane, int posX, int posY) {
 
         Button restartButton = new Button("Restart");
         restartButton.setLayoutX(posX);
@@ -30,8 +30,8 @@ public class Controls {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("pause pressed");
+                pane.pause();
             }
         });
-
     }
 }

@@ -8,7 +8,9 @@ import com.codecool.snake.entities.powerups.Beer;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import com.codecool.snake.entities.powerups.Mouse;
+
 import com.codecool.snake.entities.Heart;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.image.Image;
@@ -18,19 +20,16 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 
-
 public class Game extends Pane {
     public static int frame = 0;
     public static int time = 0;
 
-
-
-
-
     public Game() {
         new Controls(this, 10, 10);
-        initializeEnemies();
+        SnakeHead head = new SnakeHead(this, 500, 500);
+        initializeSpawners();
         initializeLives(5);
+
     }
 
     private void initializeLives(int number){
@@ -40,15 +39,13 @@ public class Game extends Pane {
 
     }
 
-    private void initializeEnemies() {
+    private void initializeSpawners() {
 
-        SnakeHead head = new SnakeHead(this, 500, 500);
         new Spawner(this, SimpleEnemy.class, 2.0);
         new Spawner(this, Mouse.class, 2.0);
         new Spawner(this, Eagle.class, 7.0);
         new Beer(this);
         new SimplePowerup(this);
-
     }
 
     public void start() {
@@ -56,21 +53,29 @@ public class Game extends Pane {
         setBackground();
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
-                case LEFT:  Globals.leftKeyDown  = true; break;
-                case RIGHT: Globals.rightKeyDown  = true; break;
+                case LEFT:
+                    Globals.leftKeyDown = true;
+                    break;
+                case RIGHT:
+                    Globals.rightKeyDown = true;
+                    break;
             }
         });
 
         scene.setOnKeyReleased(event -> {
             switch (event.getCode()) {
-                case LEFT:  Globals.leftKeyDown  = false; break;
-                case RIGHT: Globals.rightKeyDown  = false; break;
+                case LEFT:
+                    Globals.leftKeyDown = false;
+                    break;
+                case RIGHT:
+                    Globals.rightKeyDown = false;
+                    break;
             }
         });
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
 
-        }
+    }
 
     public void setBackground() {
         setBackground(new Background(new BackgroundImage(Globals.grass,
@@ -80,18 +85,22 @@ public class Game extends Pane {
 
     public void restart() {
         this.getChildren().clear();
-//        new SnakeHead(this, 500, 500);
-        initializeEnemies();
-
-
-
+        new SnakeHead(this, 500, 500);
         new Controls(this, 10, 10);
 
         Globals.gameLoop.stop();
         Globals.gameObjects.clear();
-        Globals.gameLoop = new GameLoop();
-        Globals.gameLoop.start();
+
+        start();
     }
 
-
+    public void pause() {
+        if (Globals.isGamePaused) {
+            Globals.gameLoop.start();
+            Globals.isGamePaused = false;
+        } else {
+            Globals.gameLoop.stop();
+            Globals.isGamePaused = true;
+        }
+    }
 }
