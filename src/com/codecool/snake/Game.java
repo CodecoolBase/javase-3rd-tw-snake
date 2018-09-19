@@ -30,7 +30,6 @@ public class Game extends Pane {
     }
 
     private void initializeSpawners() {
-
         new Spawner(this, SimpleEnemy.class, 2.0);
         new Spawner(this, Mouse.class, 2.5);
         new Spawner(this, Eagle.class, 4);
@@ -49,6 +48,9 @@ public class Game extends Pane {
                 case RIGHT:
                     Globals.rightKeyDown = true;
                     break;
+                case S:
+                    Globals.SKeyDown = true;
+                    break;
             }
         });
 
@@ -59,6 +61,9 @@ public class Game extends Pane {
                     break;
                 case RIGHT:
                     Globals.rightKeyDown = false;
+                    break;
+                case S:
+                    Globals.SKeyDown = false;
                     break;
             }
         });

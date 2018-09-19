@@ -11,6 +11,8 @@ import javafx.scene.layout.Pane;
 
 import java.util.Random;
 
+import static com.codecool.snake.Utils.getShootByLaser;
+
 // a simple enemy TODO make better ones.
 public class SimpleEnemy extends GameEntity implements Animatable, Interactable {
 
@@ -39,6 +41,8 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
         }
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
+
+        getShootByLaser(this);
     }
 
     @Override

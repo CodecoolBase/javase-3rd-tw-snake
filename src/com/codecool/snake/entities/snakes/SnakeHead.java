@@ -1,7 +1,6 @@
 package com.codecool.snake.entities.snakes;
 
 import com.codecool.snake.Game;
-import com.codecool.snake.GameLoop;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
@@ -19,6 +18,8 @@ public class SnakeHead extends GameEntity implements Animatable {
     public int lives = 0;
     private int score = 0;
     private int drunkTimeEnd = -1;
+    private double shootFrameEnd = -1;
+    private double shootFrameDelay = 15;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -53,6 +54,15 @@ public class SnakeHead extends GameEntity implements Animatable {
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
 
+        // shooting
+        if (Globals.SKeyDown && Game.time >= drunkTimeEnd){
+            setImage(Globals.laserSnakeHead);
+            if (Game.frame >= shootFrameEnd) {
+                shootFrameEnd = Game.frame + shootFrameDelay;
+                shoot();
+            }
+        }
+
         // check if collided with an enemy or a powerup
         for (GameEntity entity : Globals.getGameObjects()) {
             if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
@@ -69,6 +79,10 @@ public class SnakeHead extends GameEntity implements Animatable {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
         }
+    }
+
+    public void shoot(){
+        new Laser(pane);
     }
 
     public void addPart(int numParts) {
@@ -91,7 +105,7 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void changeScore(int diff) {
         score += diff;
-        System.out.println("SCORE  " + score );
+        System.out.println("SCORE " + score);
     }
 
     public void intoxicateSnake(int duration){
