@@ -41,7 +41,7 @@ public class Spawner {
             }
 
             // find a spawn point far away from snake
-            if (snakeHeadPresent && !Globals.isGamePaused) {
+            if (snakeHeadPresent && !Globals.isGamePaused && count < max) {
                 Random rnd = new Random();
                 double x, y, distance;
                 do {
