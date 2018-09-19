@@ -1,7 +1,5 @@
 package com.codecool.snake;
 
-import com.codecool.snake.entities.GameEntity;
-import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.enemies.Eagle;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.Beer;
@@ -13,13 +11,11 @@ import com.codecool.snake.entities.Heart;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
-import jdk.nashorn.internal.objects.Global;
 
 import static com.codecool.snake.Globals.heartList;
 
@@ -29,7 +25,7 @@ public class Game extends Pane {
 
     public Game() {
         //new Controls(this, 10, 10);
-        SnakeHead head = new SnakeHead(this, 500, 500);
+        new SnakeHead(this, 500, 500);
         initializeSpawners();
         initializeLives(Globals.lives);
 
@@ -52,7 +48,7 @@ public class Game extends Pane {
         new Spawner(this, SimplePowerup.class, 13.0, 1);
     }
 
-    public void start() {
+    void start() {
         Scene scene = getScene();
         setBackground();
         scene.setOnKeyPressed(event -> {
@@ -87,13 +83,13 @@ public class Game extends Pane {
 
     }
 
-    public void setBackground() {
+    private void setBackground() {
         setBackground(new Background(new BackgroundImage(Globals.grass,
                 BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
                 BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
     }
 
-    public void restart() {
+    void restart() {
         this.getChildren().clear();
         heartList.clear();
         new SnakeHead(this, 500, 500);
@@ -107,7 +103,7 @@ public class Game extends Pane {
 
     }
 
-    public void pause() {
+    void pause() {
         if (Globals.isGamePaused) {
             Globals.gameLoop.start();
             Globals.isGamePaused = false;

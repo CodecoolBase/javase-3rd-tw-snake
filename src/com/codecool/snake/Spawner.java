@@ -15,13 +15,9 @@ public class Spawner {
 
     public Spawner(Pane pane, Class<? extends Object> entityClass, double time, int max) {
 
-
         spawnObject(pane, entityClass, time, max);
     }
-
-
-
-
+    
     private void spawnObject(Pane pane, Class<? extends Object> entityClass, double time, int max) {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(time), ev -> {
 
@@ -33,7 +29,6 @@ public class Spawner {
                     count++;
                 }
             }
-
 
             for (GameEntity gameObject : Globals.gameObjects) {
                 if (gameObject instanceof SnakeHead) {
