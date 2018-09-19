@@ -8,7 +8,6 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.layout.Pane;
 import java.util.Random;
 
-// a simple powerup that makes the snake grow TODO make other powerups
 public class SimplePowerup extends GameEntity implements Interactable {
 
     private static final int bonus = 5;

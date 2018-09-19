@@ -14,7 +14,6 @@ import java.util.Random;
 
 import static com.codecool.snake.Utils.getShootByLaser;
 
-// a simple enemy TODO make better ones.
 public class SimpleEnemy extends GameEntity implements Animatable, Interactable {
 
     private Point2D heading;

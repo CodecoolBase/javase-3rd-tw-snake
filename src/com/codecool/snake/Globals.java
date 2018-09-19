@@ -28,7 +28,7 @@ public class Globals {
     public static Image beer = new Image("beer.png");
     public static Image mouse = new Image("m.png");
     public static Image eagle = new Image("eagle.png");
-    public static Image grass = new Image("grass.jpg");
+    static Image grass = new Image("grass.jpg");
     public static Image heart = new Image("heart.png");
     public static Image blackHeart = new Image("blackHeart.png");
     //.. put here the other images you want to use
@@ -38,8 +38,8 @@ public class Globals {
     public static boolean SpaceKeyDown;
     public static boolean isGamePaused = false;
     public static List<GameEntity> gameObjects;
-    public static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.
-    public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
+    static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.
+    static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
     public static GameLoop gameLoop;
     public static List<Heart> heartList;
 
