@@ -9,15 +9,17 @@ import javafx.util.Duration;
 import javafx.scene.layout.Pane;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Random;
 
 
 public class Spawner {
+    SnakeHead snakeHead;
 
     public Spawner(Pane pane, Class<? extends Object> entityClass, double time, int max) {
 
         spawnObject(pane, entityClass, time, max);
     }
-    
+
     private void spawnObject(Pane pane, Class<? extends Object> entityClass, double time, int max) {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(time), ev -> {
 
@@ -33,13 +35,24 @@ public class Spawner {
             for (GameEntity gameObject : Globals.gameObjects) {
                 if (gameObject instanceof SnakeHead) {
                     snakeHeadPresent = true;
+                    snakeHead = (SnakeHead) gameObject;
                     break;
                 }
             }
-            if (snakeHeadPresent && !Globals.isGamePaused && (count < max)) {
+
+            // find a spawn point far away from snake
+            if (snakeHeadPresent && !Globals.isGamePaused && count < max) {
+                Random rnd = new Random();
+                double x, y, distance;
+                do {
+                    x = rnd.nextDouble() * Globals.WINDOW_WIDTH;
+                    y = rnd.nextDouble() * Globals.WINDOW_HEIGHT;
+                    distance = (Math.sqrt(Math.pow(snakeHead.getX()-x,2) + Math.pow(snakeHead.getY()-y,2)));
+                } while (distance < 200);
+
                 try {
-                    Class[] arguments = new Class[]{Pane.class};
-                    entityClass.getDeclaredConstructor(arguments).newInstance(pane);
+                    Class[] arguments = new Class[]{Pane.class, Double.class, Double.class};
+                    entityClass.getDeclaredConstructor(arguments).newInstance(pane, x, y);
                 } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                     e.printStackTrace();
                 }

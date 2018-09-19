@@ -13,14 +13,12 @@ public class SimplePowerup extends GameEntity implements Interactable {
     private static final int bonus = 5;
     private int life = 1;
 
-    public SimplePowerup(Pane pane) {
+    public SimplePowerup(Pane pane, Double x, Double y) {
         super(pane);
         setImage(Globals.powerupBerry);
         pane.getChildren().add(this);
-
-        Random rnd = new Random();
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+        setX(x);
+        setY(y);
     }
 
     @Override
