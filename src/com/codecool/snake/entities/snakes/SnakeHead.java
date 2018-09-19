@@ -21,7 +21,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private int score;
     private int drunkTimeEnd = -1;
     private double shootFrameEnd = -1;
-    private double shootFrameDelay = 15;
+    private double shootFrameDelay = 15; // 15 default
 
     public int getLives() {
         return lives;
@@ -64,6 +64,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (Globals.leftKeyDown) {
             dir = dir - actualTurnRate;
         }
+
         if (Globals.rightKeyDown) {
             dir = dir + actualTurnRate;
         }

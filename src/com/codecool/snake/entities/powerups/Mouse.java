@@ -22,14 +22,12 @@ public class Mouse extends GameEntity implements Animatable, Interactable {
     private SnakeHead snakeHead;
     private double speed;
 
-    public Mouse (Pane pane) {
+    public Mouse (Pane pane, Double x, Double y) {
         super(pane);
         setImage(Globals.mouse);
         pane.getChildren().add(this);
-
-        Random rnd = new Random();
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+        setX(x);
+        setY(y);
 
         setSpeed(0.5);
 
