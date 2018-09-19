@@ -20,9 +20,11 @@ public class Globals {
 
     public static Image snakeHead = new Image("snake_head1.png");
     public static Image drunkSnakeHead = new Image("snake_head2.png");
+    public static Image laserSnakeHead = new Image("snake_head3.png");
     public static Image snakeBody = new Image("snake_body.png");
+    public static Image laser = new Image("laser.png");
     public static Image simpleEnemy = new Image("simple_enemy.png");
-    public static Image powerupBerry = new Image("powerup_berry.png");
+    public static Image powerupBerry = new Image("first_aid.png");
     public static Image beer = new Image("beer.png");
     public static Image mouse = new Image("m.png");
     public static Image eagle = new Image("eagle.png");
@@ -33,6 +35,7 @@ public class Globals {
 
     public static boolean leftKeyDown;
     public static boolean rightKeyDown;
+    public static boolean SpaceKeyDown;
     public static boolean isGamePaused = false;
     public static List<GameEntity> gameObjects;
     public static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.

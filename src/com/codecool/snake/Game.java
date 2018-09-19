@@ -28,7 +28,7 @@ public class Game extends Pane {
     public static int time = 0;
 
     public Game() {
-        new Controls(this, 10, 10);
+        //new Controls(this, 10, 10);
         SnakeHead head = new SnakeHead(this, 500, 500);
         initializeSpawners();
         initializeLives(Globals.lives);
@@ -43,7 +43,6 @@ public class Game extends Pane {
     }
 
     private void initializeSpawners() {
-
         new Spawner(this, SimpleEnemy.class, 2.0);
         new Spawner(this, Mouse.class, 2.0);
         new Spawner(this, Eagle.class, 7.0);
@@ -64,6 +63,9 @@ public class Game extends Pane {
                 case RIGHT:
                     Globals.rightKeyDown = true;
                     break;
+                case SPACE:
+                    Globals.SpaceKeyDown = true;
+                    break;
             }
         });
 
@@ -74,6 +76,9 @@ public class Game extends Pane {
                     break;
                 case RIGHT:
                     Globals.rightKeyDown = false;
+                    break;
+                case SPACE:
+                    Globals.SpaceKeyDown = false;
                     break;
             }
         });
@@ -92,7 +97,7 @@ public class Game extends Pane {
         this.getChildren().clear();
         heartList.clear();
         new SnakeHead(this, 500, 500);
-        new Controls(this, 10, 10);
+        //new Controls(this, 10, 10);
 
         Globals.gameLoop.stop();
         Globals.gameObjects.clear();

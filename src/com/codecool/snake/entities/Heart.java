@@ -22,8 +22,6 @@ public class Heart extends GameEntity  {
         this.alive = alive;
     }
 
-
-
     public Heart(Pane pane, int x, int y) {
         super(pane);
         this.alive = true;

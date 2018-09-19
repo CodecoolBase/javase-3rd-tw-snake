@@ -6,12 +6,13 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Heart;
 import com.codecool.snake.entities.Interactable;
-
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
 import java.util.Random;
+
+import static com.codecool.snake.Utils.getShootByLaser;
 
 
 public class Eagle extends GameEntity implements Animatable, Interactable {
@@ -73,6 +74,8 @@ public class Eagle extends GameEntity implements Animatable, Interactable {
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
         setRotate(dir);
+
+        getShootByLaser(this);
     }
 
     @Override
