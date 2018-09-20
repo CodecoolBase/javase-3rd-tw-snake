@@ -15,6 +15,8 @@ public class Globals {
 
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
+    public static final double SNAKE_SPAWN_X = Globals.WINDOW_WIDTH/2.0;
+    public static final double SNAKE_SPAWN_Y = Globals.WINDOW_HEIGHT/2.0;
     public static final int MAX_LIVES = 3;
 
     public static int lives = 3;
