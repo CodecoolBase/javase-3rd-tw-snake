@@ -17,7 +17,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
     public int lives;
-    private int score;
+    //    private int score;
     private int drunkTimeEnd = -1;
     private int superPowerEnd = -1;
     private double shootFrameEnd = -1;
@@ -31,13 +31,13 @@ public class SnakeHead extends GameEntity implements Animatable {
         this.lives = lives;
     }
 
-    public int getScore() {
-        return score;
-    }
+//    public int getScore() {
+//        return Globals.score;
+//    }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
+//    public void setScore(int score) {
+//        Globals.score = score;
+//    }
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -46,7 +46,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         health = 100;
         tail = this;
         lives = Globals.lives;
-        score = 0;
+//        Globals.score = 0;
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
         addPart(8);
@@ -119,7 +119,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
     }
 
-    public void shoot(boolean superPower, boolean secondLaser){
+    public void shoot(boolean superPower, boolean secondLaser) {
         new Laser(pane, superPower, secondLaser);
     }
 
@@ -131,23 +131,23 @@ public class SnakeHead extends GameEntity implements Animatable {
     }
 
     public void changeLives(int diff) {
-        if (this.getLives() < Globals.lives && diff>0 || diff<0) {
-            this.setLives(this.getLives()+diff);
+        if (this.getLives() < Globals.lives && diff > 0 || diff < 0) {
+            this.setLives(this.getLives() + diff);
         }
         System.out.println("LIVES " + this.getLives());
     }
 
     public void changeScore(int diff) {
-        this.setScore(getScore()+diff);
-        System.out.println("SCORE  " + score );
+        Globals.score = Globals.score + diff;
+        System.out.println("SCORE  " + Globals.score);
     }
 
-    public void intoxicateSnake(int duration){
+    public void intoxicateSnake(int duration) {
         drunkTimeEnd = Game.time + duration;
     }
 
-    public void superPower(int duration){
-        drunkTimeEnd =- 5;
+    public void superPower(int duration) {
+        drunkTimeEnd = -5;
         superPowerEnd = Game.time + duration;
     }
 }

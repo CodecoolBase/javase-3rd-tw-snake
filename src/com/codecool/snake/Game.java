@@ -17,30 +17,33 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.text.Text;
 
 import static com.codecool.snake.Globals.heartList;
 
 public class Game extends Pane {
     public static int frame = 0;
     public static int time = 0;
+    public static Score textScore;
 
     public Game() {
+
         new SnakeHead(this, 500, 500);
         initializeSpawners();
         initializeLives(Globals.lives);
-
+        textScore = new Score(this);
+        System.out.println(this.getChildren());
     }
 
-    private void initializeLives(int number){
-        for (int i=0; i<number; i++){
-            new Heart (this, 920-(60*i), 15 );
+    private void initializeLives(int number) {
+        for (int i = 0; i < number; i++) {
+            new Heart(this, 920 - (60 * i), 15);
         }
-
     }
 
     private void initializeSpawners() {
         new Spawner(this, SimpleEnemy.class, 0.5, 100);
-        new Spawner(this, Mouse.class, 1.0, 10);
+        new Spawner(this, Mouse.class, 0.01, 10);
         new Spawner(this, Eagle.class, 3.0, 6);
         new Spawner(this, Beer.class, 5.0, 1);
         new Spawner(this, FirstAid.class, 11.0, 1);
@@ -83,9 +86,9 @@ public class Game extends Pane {
                     break;
             }
         });
+
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
-
     }
 
     private void setBackground() {
@@ -103,7 +106,9 @@ public class Game extends Pane {
             Globals.gameObjects.clear();
             Globals.enemies.clear();
             Globals.isGamePaused = false;
+            Globals.score = 0;
             initializeLives(Globals.lives);
+            textScore = new Score(this);
             start();
         } else {
             pause();
