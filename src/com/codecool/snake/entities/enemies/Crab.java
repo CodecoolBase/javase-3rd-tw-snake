@@ -21,7 +21,7 @@ public class Crab extends GameEntity implements Animatable, Interactable {
 
     public Crab(Pane pane, Double x, Double y) {
         super(pane);
-        setImage(Globals.simpleEnemy);
+        setImage(Globals.crab);
         pane.getChildren().add(this);
         int speed = 1;
         setX(x);
