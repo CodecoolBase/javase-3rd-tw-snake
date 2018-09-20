@@ -1,7 +1,7 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.enemies.Eagle;
-import com.codecool.snake.entities.enemies.SimpleEnemy;
+import com.codecool.snake.entities.enemies.Crab;
 import com.codecool.snake.entities.powerups.SuperPower;
 import com.codecool.snake.entities.powerups.Beer;
 import com.codecool.snake.entities.powerups.FirstAid;
@@ -39,8 +39,8 @@ public class Game extends Pane {
     }
 
     private void initializeSpawners() {
-        new Spawner(this, SimpleEnemy.class, 0.5, 100);
-        new Spawner(this, Mouse.class, 1.0, 10);
+        new Spawner(this, Crab.class, 1, 100);
+        new Spawner(this, Mouse.class, 2.0, 10);
         new Spawner(this, Eagle.class, 3.0, 6);
         new Spawner(this, Beer.class, 5.0, 1);
         new Spawner(this, FirstAid.class, 11.0, 1);
@@ -89,7 +89,7 @@ public class Game extends Pane {
     }
 
     private void setBackground() {
-        setBackground(new Background(new BackgroundImage(Globals.grass,
+        setBackground(new Background(new BackgroundImage(Globals.background,
                 BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
                 BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
     }
