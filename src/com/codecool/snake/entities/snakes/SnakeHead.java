@@ -1,5 +1,6 @@
 package com.codecool.snake.entities.snakes;
 
+import com.codecool.snake.Curtain;
 import com.codecool.snake.Game;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
@@ -114,6 +115,7 @@ public class SnakeHead extends GameEntity implements Animatable {
             System.out.println("Game Over");
             Globals.isGamePaused = true;
             Globals.gameLoop.stop();
+            Curtain.set(pane, Globals.gameOver);
         }
     }
 

@@ -32,6 +32,8 @@ public class Globals {
     static Image background = new Image("sand.jpg");
     public static Image heart = new Image("heart.png");
     public static Image blackHeart = new Image("blackHeart.png");
+    public static Image gameOver = new Image("gameover.png");
+    public static Image pause = new Image("pause.png");
     //.. put here the other images you want to use
 
     public static boolean leftKeyDown;

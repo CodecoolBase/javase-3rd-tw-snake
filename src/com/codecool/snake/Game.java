@@ -25,7 +25,6 @@ public class Game extends Pane {
     public static int time = 0;
 
     public Game() {
-        //new Controls(this, 10, 10);
         new SnakeHead(this, 500, 500);
         initializeSpawners();
         initializeLives(Globals.lives);
@@ -62,6 +61,12 @@ public class Game extends Pane {
                 case SPACE:
                     Globals.SpaceKeyDown = true;
                     break;
+                case R:
+                    restart();
+                    break;
+                case P:
+                    pause();
+                    break;
             }
         });
 
@@ -90,26 +95,31 @@ public class Game extends Pane {
     }
 
     void restart() {
-        this.getChildren().clear();
-        heartList.clear();
-        new SnakeHead(this, 500, 500);
-        //new Controls(this, 10, 10);
-
-        Globals.gameLoop.stop();
-        Globals.gameObjects.clear();
-        Globals.isGamePaused = false;
-        initializeLives(Globals.lives);
-        start();
-
+        if (!Globals.isGamePaused) {
+            this.getChildren().clear();
+            heartList.clear();
+            new SnakeHead(this, 500, 500);
+            Globals.gameLoop.stop();
+            Globals.gameObjects.clear();
+            Globals.enemies.clear();
+            Globals.isGamePaused = false;
+            initializeLives(Globals.lives);
+            start();
+        } else {
+            pause();
+            restart();
+        }
     }
 
     void pause() {
         if (Globals.isGamePaused) {
             Globals.gameLoop.start();
             Globals.isGamePaused = false;
+            Curtain.remove(this);
         } else {
             Globals.gameLoop.stop();
             Globals.isGamePaused = true;
+            Curtain.set(this, Globals.pause);
         }
     }
 }
