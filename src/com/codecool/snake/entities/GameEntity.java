@@ -19,6 +19,7 @@ public abstract class GameEntity extends ImageView {
         if (getParent() != null) {
             pane.getChildren().remove(this);
         }
+        Globals.removeEnemy(this);
         Globals.removeGameObject(this);
     }
 

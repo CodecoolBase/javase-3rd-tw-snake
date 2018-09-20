@@ -22,6 +22,7 @@ public class Eagle extends GameEntity implements Animatable, Interactable {
     private int damage;
     private int speed;
 
+
     public Eagle(Pane pane, Double x, Double y) {
         super(pane);
         setDamage(-1);
@@ -35,6 +36,7 @@ public class Eagle extends GameEntity implements Animatable, Interactable {
                 setSnakeHead((SnakeHead) gameObject);
             }
         }
+        Globals.addEnemy(this);
     }
 
     public SnakeHead getSnakeHead() {

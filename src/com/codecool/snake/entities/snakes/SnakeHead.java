@@ -5,11 +5,9 @@ import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
-import com.codecool.snake.entities.Heart;
 import com.codecool.snake.entities.Interactable;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
-import jdk.nashorn.internal.objects.Global;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
@@ -20,8 +18,9 @@ public class SnakeHead extends GameEntity implements Animatable {
     public int lives;
     private int score;
     private int drunkTimeEnd = -1;
+    private int superPowerEnd = -1;
     private double shootFrameEnd = -1;
-    private double shootFrameDelay = 15; // 15 default
+    private double shootFrameDelay = 15;
 
     public int getLives() {
         return lives;
@@ -76,11 +75,26 @@ public class SnakeHead extends GameEntity implements Animatable {
         setY(getY() + heading.getY());
 
         // shooting
-        if (Globals.SpaceKeyDown && Game.time >= drunkTimeEnd){
+        if (Game.time < superPowerEnd && Game.time >= drunkTimeEnd) {
             setImage(Globals.laserSnakeHead);
-            if (Game.frame >= shootFrameEnd) {
-                shootFrameEnd = Game.frame + shootFrameDelay;
-                shoot();
+            speed = 4;
+            turnRate = 4;
+            if (Globals.enemies.size() > 0) {
+                if (Game.frame >= shootFrameEnd) {
+                    shootFrameEnd = Game.frame + shootFrameDelay;
+                    shoot(true, false);
+                    shoot(true, true);
+                }
+            }
+        } else {
+            speed = 2;
+            turnRate = 2;
+            if (Globals.SpaceKeyDown && Game.time >= drunkTimeEnd) {
+                setImage(Globals.laserSnakeHead);
+                if (Game.frame >= shootFrameEnd) {
+                    shootFrameEnd = Game.frame + shootFrameDelay;
+                    shoot(false, false);
+                }
             }
         }
 
@@ -103,8 +117,8 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
     }
 
-    public void shoot(){
-        new Laser(pane);
+    public void shoot(boolean superPower, boolean secondLaser){
+        new Laser(pane, superPower, secondLaser);
     }
 
     public void addPart(int numParts) {
@@ -128,5 +142,10 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void intoxicateSnake(int duration){
         drunkTimeEnd = Game.time + duration;
+    }
+
+    public void superPower(int duration){
+        drunkTimeEnd =- 5;
+        superPowerEnd = Game.time + duration;
     }
 }

@@ -8,14 +8,14 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.layout.Pane;
 import java.util.Random;
 
-public class SimplePowerup extends GameEntity implements Interactable {
+public class FirstAid extends GameEntity implements Interactable {
 
     private static final int bonus = 5;
     private int life = 1;
 
-    public SimplePowerup(Pane pane, Double x, Double y) {
+    public FirstAid(Pane pane, Double x, Double y) {
         super(pane);
-        setImage(Globals.powerupBerry);
+        setImage(Globals.firstAid);
         pane.getChildren().add(this);
         setX(x);
         setY(y);

@@ -24,9 +24,10 @@ public class Globals {
     public static Image snakeBody = new Image("snake_body.png");
     public static Image laser = new Image("laser.png");
     public static Image simpleEnemy = new Image("simple_enemy.png");
-    public static Image powerupBerry = new Image("first_aid.png");
+    public static Image firstAid = new Image("first_aid.png");
     public static Image beer = new Image("beer.png");
-    public static Image mouse = new Image("m.png");
+    public static Image superMan = new Image("super_man.png");
+    public static Image mouse = new Image("mouse.png");
     public static Image eagle = new Image("eagle.png");
     static Image grass = new Image("grass.jpg");
     public static Image heart = new Image("heart.png");
@@ -40,6 +41,11 @@ public class Globals {
     public static List<GameEntity> gameObjects;
     static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.
     static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
+
+    public static List<GameEntity> enemies;
+    static List<GameEntity> newEnemies; // Holds enemies crated in this frame.
+    static List<GameEntity> oldEnemies; // Holds enemies that will be destroyed this frame.
+
     public static GameLoop gameLoop;
     public static List<Heart> heartList;
 
@@ -49,6 +55,9 @@ public class Globals {
         gameObjects = new LinkedList<>();
         newGameObjects = new LinkedList<>();
         oldGameObjects = new LinkedList<>();
+        enemies = new LinkedList<>();
+        newEnemies = new LinkedList<>();
+        oldEnemies = new LinkedList<>();
         heartList = new LinkedList<>();
     }
 
@@ -62,5 +71,17 @@ public class Globals {
 
     public static List<GameEntity> getGameObjects() {
         return Collections.unmodifiableList(gameObjects);
+    }
+
+    public static void addEnemy(GameEntity toAdd) {
+        newEnemies.add(toAdd);
+    }
+
+    public static void removeEnemy(GameEntity toRemove) {
+        oldEnemies.add(toRemove);
+    }
+
+    public static List<GameEntity> getEnemies() {
+        return Collections.unmodifiableList(enemies);
     }
 }
