@@ -11,14 +11,12 @@ import java.util.Random;
 // a simple powerup that makes the snake grow TODO make other powerups
 public class Beer extends GameEntity implements Interactable {
 
-    public Beer(Pane pane) {
+    public Beer(Pane pane, Double x, Double y) {
         super(pane);
         setImage(Globals.beer);
         pane.getChildren().add(this);
-
-        Random rnd = new Random();
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+        setX(x);
+        setY(y);
     }
 
     @Override

@@ -23,6 +23,12 @@ public class GameLoop extends AnimationTimer {
             Game.time++;
         }
 
+        Globals.enemies.addAll(Globals.newEnemies);
+        Globals.newEnemies.clear();
+
+        Globals.enemies.removeAll(Globals.oldEnemies);
+        Globals.oldEnemies.clear();
+
         Globals.gameObjects.addAll(Globals.newGameObjects);
         Globals.newGameObjects.clear();
 

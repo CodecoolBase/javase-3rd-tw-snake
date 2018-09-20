@@ -22,20 +22,21 @@ public class Eagle extends GameEntity implements Animatable, Interactable {
     private int damage;
     private int speed;
 
-    public Eagle(Pane pane) {
+
+    public Eagle(Pane pane, Double x, Double y) {
         super(pane);
         setDamage(-1);
         setSpeed(1);
         setImage(Globals.eagle);
         pane.getChildren().add(this);
-        Random rnd = new Random();
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+        setX(x);
+        setY(y);
         for (GameEntity gameObject : Globals.gameObjects) {
             if (gameObject instanceof SnakeHead) {
                 setSnakeHead((SnakeHead) gameObject);
             }
         }
+        Globals.addEnemy(this);
     }
 
     public SnakeHead getSnakeHead() {

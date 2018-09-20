@@ -10,8 +10,6 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.layout.Pane;
 import javafx.geometry.Point2D;
 
-import java.util.Random;
-
 import static com.codecool.snake.Utils.getShootByLaser;
 
 
@@ -22,16 +20,14 @@ public class Mouse extends GameEntity implements Animatable, Interactable {
     private SnakeHead snakeHead;
     private double speed;
 
-    public Mouse (Pane pane) {
+    public Mouse (Pane pane, Double x, Double y) {
         super(pane);
         setImage(Globals.mouse);
         pane.getChildren().add(this);
+        setX(x);
+        setY(y);
 
-        Random rnd = new Random();
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
-
-        setSpeed(0.5);
+        setSpeed(0.33);
 
         for (GameEntity gameObject : Globals.gameObjects) {
             if (gameObject instanceof SnakeHead) {
