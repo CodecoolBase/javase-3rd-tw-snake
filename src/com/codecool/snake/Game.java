@@ -20,6 +20,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 
+import static com.codecool.snake.Globals.MAX_LIVES;
 import static com.codecool.snake.Globals.heartList;
 
 public class Game extends Pane {
@@ -42,16 +43,13 @@ public class Game extends Pane {
     }
 
     public static void reSpawnSnake(){
-
         for (GameEntity gameObject : Globals.gameObjects) {
-            if (gameObject instanceof SnakeHead || gameObject instanceof SnakeBody) {
+            if (!(gameObject instanceof Heart)) {
                 gameObject.destroy();
             }
         }
-
-        new SnakeHead( Main.game, Globals.WINDOW_WIDTH/2.0, Globals.WINDOW_HEIGHT/2.0);
+        new SnakeHead( Main.game, Globals.SNAKE_SPAWN_X, Globals.SNAKE_SPAWN_X);
     }
-
 
     private void initializeSpawners() {
         new Spawner(this, Crab.class, 1, 100);
@@ -109,15 +107,17 @@ public class Game extends Pane {
                 BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
     }
 
-    void restart() {
+    private void restart() {
         if (!Globals.isGamePaused) {
             this.getChildren().clear();
             heartList.clear();
-            new SnakeHead(this, 500, 500);
+            Globals.snakeLength = 8;
             Globals.gameLoop.stop();
             Globals.gameObjects.clear();
             Globals.enemies.clear();
             Globals.isGamePaused = false;
+            Globals.lives = MAX_LIVES;
+            new SnakeHead(this, Globals.SNAKE_SPAWN_X, Globals.SNAKE_SPAWN_Y);
             initializeLives(Globals.lives);
             start();
         } else {
@@ -126,7 +126,7 @@ public class Game extends Pane {
         }
     }
 
-    void pause() {
+    private void pause() {
         if (Globals.isGamePaused) {
             Globals.gameLoop.start();
             Globals.isGamePaused = false;
