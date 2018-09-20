@@ -29,7 +29,7 @@ public class Globals {
     public static Image superMan = new Image("super_man.png");
     public static Image mouse = new Image("mouse.png");
     public static Image eagle = new Image("eagle.png");
-    static Image grass = new Image("grass.jpg");
+    static Image background = new Image("sand.jpg");
     public static Image heart = new Image("heart.png");
     public static Image blackHeart = new Image("blackHeart.png");
     //.. put here the other images you want to use
