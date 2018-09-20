@@ -1,10 +1,12 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.enemies.Eagle;
 import com.codecool.snake.entities.enemies.Crab;
 import com.codecool.snake.entities.powerups.SuperPower;
 import com.codecool.snake.entities.powerups.Beer;
 import com.codecool.snake.entities.powerups.FirstAid;
+import com.codecool.snake.entities.snakes.SnakeBody;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import com.codecool.snake.entities.powerups.Mouse;
 
@@ -23,12 +25,13 @@ import static com.codecool.snake.Globals.heartList;
 public class Game extends Pane {
     public static int frame = 0;
     public static int time = 0;
+    public static SnakeHead snake;
 
     public Game() {
-        new SnakeHead(this, 500, 500);
+        //new Controls(this, 10, 10);
+        snake = new SnakeHead(this, Globals.WINDOW_WIDTH/2.0, Globals.WINDOW_HEIGHT/2.0);
         initializeSpawners();
         initializeLives(Globals.lives);
-
     }
 
     private void initializeLives(int number){
@@ -37,6 +40,18 @@ public class Game extends Pane {
         }
 
     }
+
+    public static void reSpawnSnake(){
+
+        for (GameEntity gameObject : Globals.gameObjects) {
+            if (gameObject instanceof SnakeHead || gameObject instanceof SnakeBody) {
+                gameObject.destroy();
+            }
+        }
+
+        new SnakeHead( Main.game, Globals.WINDOW_WIDTH/2.0, Globals.WINDOW_HEIGHT/2.0);
+    }
+
 
     private void initializeSpawners() {
         new Spawner(this, Crab.class, 1, 100);

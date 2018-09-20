@@ -49,7 +49,6 @@ public class Crab extends GameEntity implements Animatable, Interactable {
         player.changeLives(damage);
         player.changeScore(damage);
         destroy();
-        Heart.switchOffRedHeart();
     }
 
     @Override
