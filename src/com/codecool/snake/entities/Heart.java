@@ -36,7 +36,7 @@ public class Heart extends GameEntity  {
 
     private void switchHeartColor() {
 
-        setImage(this.alive == true ? Globals.heart : Globals.blackHeart);
+        setImage(this.alive ? Globals.heart : Globals.blackHeart);
 
     }
 
@@ -52,7 +52,7 @@ public class Heart extends GameEntity  {
 
     public static void switchOnBlackHeart() {
         for (int i=heartList.size()-1; i>=0; i--) {
-            if (heartList.get(i).alive == false) {
+            if (!heartList.get(i).alive) {
                 heartList.get(i).alive = true;
                 heartList.get(i).switchHeartColor();
                 break;

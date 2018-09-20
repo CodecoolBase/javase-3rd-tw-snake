@@ -15,8 +15,10 @@ public class Globals {
 
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
+    public static final int MAX_LIVES = 3;
 
     public static int lives = 3;
+    public static int snakeLength = 8;
 
     public static Image snakeHead = new Image("snake_head1.png");
     public static Image drunkSnakeHead = new Image("snake_head2.png");

@@ -16,20 +16,11 @@ public class SnakeHead extends GameEntity implements Animatable {
     private static float speed = 2;
     private static float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
-    private int health;
-    public int lives;
     private int score;
     private int drunkTimeEnd = -1;
     private double shootFrameEnd = -1;
     private double shootFrameDelay = 15;
-
-    public int getLives() {
-        return lives;
-    }
-
-    public void setLives(int lives) {
-        this.lives = lives;
-    }
+    double dir;
 
     public int getScore() {
         return score;
@@ -39,21 +30,19 @@ public class SnakeHead extends GameEntity implements Animatable {
         this.score = score;
     }
 
-    public SnakeHead(Pane pane, int xc, int yc) {
+    public SnakeHead(Pane pane, double xc, double yc) {
         super(pane);
         setX(xc);
         setY(yc);
-        health = 100;
         tail = this;
-        lives = Globals.lives;
         score = 0;
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
-        addPart(8);
+        addPart(Globals.snakeLength);
     }
 
     public void step() {
-        double dir = getRotate();
+        dir = getRotate();
 
         // make snake squint when drunk
         setImage(Game.time < drunkTimeEnd ? Globals.drunkSnakeHead : Globals.snakeHead);
@@ -95,11 +84,16 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
 
         // check for game over condition
-        if (isOutOfBounds() || this.getLives() <= 0) {
+        if (Globals.lives <= 0) {
             System.out.println("Game Over");
             Globals.isGamePaused = true;
             Globals.gameLoop.stop();
         }
+
+        if (isOutOfBounds()){
+            changeLives(-1);
+            Game.reSpawnSnake();}
+
     }
 
     public void shoot(){
@@ -114,10 +108,16 @@ public class SnakeHead extends GameEntity implements Animatable {
     }
 
     public void changeLives(int diff) {
-        if (this.getLives() < Globals.lives && diff>0 || diff<0) {
-            this.setLives(this.getLives()+diff);
+        if (Globals.lives  < Globals.MAX_LIVES && diff>0 || diff<0) {
+            Globals.lives += diff;
         }
-        System.out.println("LIVES " + this.getLives());
+        System.out.println("LIVES " + Globals.lives);
+
+        if (diff>0){
+            Heart.switchOnBlackHeart();
+        } else {
+            Heart.switchOffRedHeart();
+        }
     }
 
     public void changeScore(int diff) {
@@ -128,4 +128,5 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void intoxicateSnake(int duration){
         drunkTimeEnd = Game.time + duration;
     }
+
 }

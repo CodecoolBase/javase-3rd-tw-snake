@@ -1,9 +1,11 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.enemies.Eagle;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.Beer;
 import com.codecool.snake.entities.powerups.SimplePowerup;
+import com.codecool.snake.entities.snakes.SnakeBody;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import com.codecool.snake.entities.powerups.Mouse;
 
@@ -22,13 +24,13 @@ import static com.codecool.snake.Globals.heartList;
 public class Game extends Pane {
     public static int frame = 0;
     public static int time = 0;
+    public static SnakeHead snake;
 
     public Game() {
         //new Controls(this, 10, 10);
-        new SnakeHead(this, 500, 500);
+        snake = new SnakeHead(this, Globals.WINDOW_WIDTH/2.0, Globals.WINDOW_HEIGHT/2.0);
         initializeSpawners();
         initializeLives(Globals.lives);
-
     }
 
     private void initializeLives(int number){
@@ -37,6 +39,18 @@ public class Game extends Pane {
         }
 
     }
+
+    public static void reSpawnSnake(){
+
+        for (GameEntity gameObject : Globals.gameObjects) {
+            if (gameObject instanceof SnakeHead || gameObject instanceof SnakeBody) {
+                gameObject.destroy();
+            }
+        }
+
+        new SnakeHead( Main.game, Globals.WINDOW_WIDTH/2.0, Globals.WINDOW_HEIGHT/2.0);
+    }
+
 
     private void initializeSpawners() {
 
@@ -89,7 +103,7 @@ public class Game extends Pane {
                 BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
     }
 
-    void restart() {
+    public void restart() {
         this.getChildren().clear();
         heartList.clear();
         new SnakeHead(this, 500, 500);
