@@ -14,12 +14,12 @@ import java.util.Random;
 
 import static com.codecool.snake.Utils.getShootByLaser;
 
-public class SimpleEnemy extends GameEntity implements Animatable, Interactable {
+public class Crab extends GameEntity implements Animatable, Interactable {
 
     private Point2D heading;
     private static final int damage = -1;
 
-    public SimpleEnemy(Pane pane, Double x, Double y) {
+    public Crab(Pane pane, Double x, Double y) {
         super(pane);
         setImage(Globals.simpleEnemy);
         pane.getChildren().add(this);

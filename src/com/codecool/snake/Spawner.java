@@ -45,8 +45,8 @@ public class Spawner {
                 Random rnd = new Random();
                 double x, y, distance;
                 do {
-                    x = rnd.nextDouble() * Globals.WINDOW_WIDTH;
-                    y = rnd.nextDouble() * Globals.WINDOW_HEIGHT;
+                    x = 100 + (Globals.WINDOW_WIDTH - 200) * rnd.nextDouble();
+                    y = 100 + (Globals.WINDOW_HEIGHT - 200) * rnd.nextDouble();
                     distance = (Math.sqrt(Math.pow(snakeHead.getX()-x,2) + Math.pow(snakeHead.getY()-y,2)));
                 } while (distance < 200);
 
