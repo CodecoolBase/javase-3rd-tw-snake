@@ -15,10 +15,14 @@ public class Globals {
 
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
+    public static final double SNAKE_SPAWN_X = Globals.WINDOW_WIDTH/2.0;
+    public static final double SNAKE_SPAWN_Y = Globals.WINDOW_HEIGHT/2.0;
+    public static final int MAX_LIVES = 3;
     public static final int SCORE_TEXT_X = 20;
     public static final int SCORE_TEXT_Y = 50;
 
     public static int lives = 3;
+    public static int snakeLength = 8;
     public static int score = 0;
 
     public static Image snakeHead = new Image("snake_head1.png");
@@ -26,13 +30,13 @@ public class Globals {
     public static Image laserSnakeHead = new Image("snake_head3.png");
     public static Image snakeBody = new Image("snake_body.png");
     public static Image laser = new Image("laser.png");
-    public static Image simpleEnemy = new Image("simple_enemy.png");
+    public static Image simpleEnemy = new Image("crab.png");
     public static Image firstAid = new Image("first_aid.png");
     public static Image beer = new Image("beer.png");
     public static Image superMan = new Image("super_man.png");
     public static Image mouse = new Image("mouse.png");
     public static Image eagle = new Image("eagle.png");
-    static Image grass = new Image("grass.jpg");
+    static Image background = new Image("sand.jpg");
     public static Image heart = new Image("heart.png");
     public static Image blackHeart = new Image("blackHeart.png");
     public static Image gameOver = new Image("gameover.png");

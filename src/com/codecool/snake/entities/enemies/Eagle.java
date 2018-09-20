@@ -83,7 +83,6 @@ public class Eagle extends GameEntity implements Animatable, Interactable {
     public void apply(SnakeHead player) {
         player.changeLives(damage);
         destroy();
-        Heart.switchOffRedHeart();
 
     }
 

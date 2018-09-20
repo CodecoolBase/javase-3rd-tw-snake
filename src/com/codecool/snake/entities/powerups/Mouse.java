@@ -10,8 +10,6 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.layout.Pane;
 import javafx.geometry.Point2D;
 
-import java.util.Random;
-
 import static com.codecool.snake.Utils.getShootByLaser;
 
 
@@ -29,7 +27,7 @@ public class Mouse extends GameEntity implements Animatable, Interactable {
         setX(x);
         setY(y);
 
-        setSpeed(0.5);
+        setSpeed(0.33);
 
         for (GameEntity gameObject : Globals.gameObjects) {
             if (gameObject instanceof SnakeHead) {
@@ -74,6 +72,7 @@ public class Mouse extends GameEntity implements Animatable, Interactable {
 
     @Override
     public void apply(SnakeHead snakeHead) {
+        Globals.snakeLength +=4;
         snakeHead.addPart(4);
         snakeHead.changeScore(4);
         destroy();
